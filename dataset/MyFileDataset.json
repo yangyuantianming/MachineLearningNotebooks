@@ -1,0 +1,24 @@
+{
+	"name": "MyFileDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"path": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "*.png",
+				"folderPath": "mnist_images",
+				"container": "azureml-blobstore-1afc228f-a203-4f03-94d0-2da57e708514"
+			}
+		}
+	}
+}
