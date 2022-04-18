@@ -22,8 +22,8 @@
 					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6",
 					"dataSetDefinitionValueAssignments": {
 						"mnist_param": {
-							"dataSetReference": {
-								"name": "mnist_small"
+							"savedDataSetReference": {
+								"id": "f87163d8-582f-432c-83c0-44b1f229e9a4"
 							}
 						}
 					}
