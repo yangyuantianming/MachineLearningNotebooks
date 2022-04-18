@@ -1,5 +1,5 @@
 {
-	"name": "mn_images",
+	"name": "MyFileDatset",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
