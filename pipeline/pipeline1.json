@@ -19,17 +19,14 @@
 						"batch_size_param": "1",
 						"process_count_param": "2",
 						"mnist_param": {
-							"value": "@pipeline().DataFactory",
-							"type": "Expression"
+							"referenceName": "MyFileDataset",
+							"parameters": {
+								"folder": "mnist_images"
+							},
+							"type": "DatasetReference"
 						}
 					},
-					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6",
-					"dataPathAssignments": {
-						"mn_dataset": {
-							"DataStoreName": "workspaceblobstore",
-							"RelativePath": "mnist_images"
-						}
-					}
+					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureMLService1",
