@@ -20,7 +20,13 @@
 						"process_count_param": "2",
 						"mnist_param": "test"
 					},
-					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6"
+					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6",
+					"dataPathAssignments": {
+						"mn_dataset": {
+							"DataStoreName": "workspaceblobstore",
+							"RelativePath": "mnist_images"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureMLService1",
