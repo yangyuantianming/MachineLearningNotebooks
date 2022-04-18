@@ -23,9 +23,7 @@
 					"dataSetDefinitionValueAssignments": {
 						"mnist_param": {
 							"dataSetReference": {
-								"id": "f87163d8-582f-432c-83c0-44b1f229e9a4",
-								"name": "mnist_small",
-								"version": "1"
+								"id": "f87163d8-582f-432c-83c0-44b1f229e9a4"
 							}
 						}
 					}
