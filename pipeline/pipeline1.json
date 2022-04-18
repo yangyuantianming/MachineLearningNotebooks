@@ -28,6 +28,14 @@
 								"type": "Expression"
 							}
 						}
+					},
+					"dataSetDefinitionValueAssignments": {
+						"mnist_param": {
+							"dataSetReference": {
+								"name": "mnist_small",
+								"version": "1"
+							}
+						}
 					}
 				},
 				"linkedServiceName": {
