@@ -22,9 +22,8 @@
 					"mlPipelineId": "541ca8a3-b2e4-4f18-8489-06fce94e8fb2",
 					"dataSetDefinitionValueAssignments": {
 						"mnist_param": {
-							"literalValue": {
-								"dataStoreName": "workspaceblobstore",
-								"relativePath": "mnist_images/"
+							"savedDataSetReference": {
+								"id": "f87163d8-582f-432c-83c0-44b1f229e9a4"
 							}
 						}
 					}
