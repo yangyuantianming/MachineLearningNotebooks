@@ -18,7 +18,10 @@
 					"mlPipelineParameters": {
 						"batch_size_param": "1",
 						"process_count_param": "2",
-						"mnist_param": "test"
+						"mnist_param": {
+							"value": "{\n    \"value\": \"mn_dataset\",\n    \"type\": \"DatasetReference\"\n}",
+							"type": "Expression"
+						}
 					},
 					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6",
 					"dataPathAssignments": {
