@@ -6,8 +6,16 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"path": {
+			"container": {
+				"type": "string",
+				"defaultValue": "azureml-blobstore-1afc228f-a203-4f03-94d0-2da57e708514"
+			},
+			"folder": {
 				"type": "string"
+			},
+			"files": {
+				"type": "string",
+				"defaultValue": "*"
 			}
 		},
 		"annotations": [],
@@ -15,9 +23,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "*.png",
-				"folderPath": "mnist_images",
-				"container": "azureml-blobstore-1afc228f-a203-4f03-94d0-2da57e708514"
+				"fileName": {
+					"value": "@dataset().files",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folder",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
 			}
 		}
 	}
