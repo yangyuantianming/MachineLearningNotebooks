@@ -19,7 +19,7 @@
 						"batch_size_param": "1",
 						"process_count_param": "1"
 					},
-					"mlPipelineId": "61b4c6ab-2bc9-4fbc-a568-d1d4d6918364",
+					"mlPipelineId": "541ca8a3-b2e4-4f18-8489-06fce94e8fb2",
 					"dataSetDefinitionValueAssignments": {
 						"mnist_param": {
 							"literalValue": {
