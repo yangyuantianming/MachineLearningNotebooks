@@ -1,0 +1,9 @@
+{
+	"name": "yayuan-adf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "df559f40-6363-4340-85ea-674d42d0417a",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
