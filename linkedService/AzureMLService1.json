@@ -1,0 +1,13 @@
+{
+	"name": "AzureMLService1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMLService",
+		"typeProperties": {
+			"subscriptionId": "4aaa645c-5ae2-4ae9-a17a-84b9023bc56a",
+			"resourceGroupName": "yayuan",
+			"mlWorkspaceName": "ocp-ws",
+			"authentication": "MSI"
+		}
+	}
+}
