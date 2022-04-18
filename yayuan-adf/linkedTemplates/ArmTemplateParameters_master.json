@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "yayuan-adf"
+		},
+		"AzureMLService1_properties_typeProperties_subscriptionId": {
+			"value": "4aaa645c-5ae2-4ae9-a17a-84b9023bc56a"
+		},
+		"AzureMLService1_properties_typeProperties_resourceGroupName": {
+			"value": "yayuan"
+		},
+		"AzureMLService1_properties_typeProperties_mlWorkspaceName": {
+			"value": "ocp-ws"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
