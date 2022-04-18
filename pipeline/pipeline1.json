@@ -20,15 +20,6 @@
 						"process_count_param": "1"
 					},
 					"mlPipelineId": "1b49f0a2-08db-46dc-90e0-8a1fee21b5a6",
-					"dataPathAssignments": {
-						"dataset": {
-							"DataStoreName": "workspaceblobstore",
-							"RelativePath": {
-								"value": "mnist_images",
-								"type": "Expression"
-							}
-						}
-					},
 					"dataSetDefinitionValueAssignments": {
 						"mnist_param": {
 							"dataSetReference": {
