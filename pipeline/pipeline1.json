@@ -19,7 +19,7 @@
 						"batch_size_param": "1",
 						"process_count_param": "2",
 						"mnist_param": {
-							"value": "{\n    \"value\": \"mn_dataset\",\n    \"type\": \"DatasetReference\"\n}",
+							"value": "@pipeline().DataFactory",
 							"type": "Expression"
 						}
 					},
