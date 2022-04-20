@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
+					"url": "https://eastus.api.azureml.ms/dataset/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
 					"method": "POST",
 					"body": {
 						"DatastoreName": "workspaceblobstore",
