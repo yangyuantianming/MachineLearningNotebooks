@@ -1,0 +1,76 @@
+{
+	"name": "PRS pipeline template",
+	"properties": {
+		"activities": [
+			{
+				"name": "SaveDatasetFromDataStore",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
+					"method": "POST",
+					"body": {
+						"DatastoreName": "workspaceblobstore",
+						"RelativePath": "mnist_images/"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			},
+			{
+				"name": "TriggerAzureMLPipline",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "SaveDatasetFromDataStore",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/b74d82ad-22bc-44ab-895c-5eef91a0e578",
+					"method": "POST",
+					"body": {
+						"ExperimentName": "digit_identification",
+						"RunSource": "SDK",
+						"dataSetDefinitionValueAssignments": {
+							"mnist_param": {
+								"savedDataSetReference": {
+									"Id": "@activity('SaveDatasetFromDataStore').output.id"
+								}
+							}
+						},
+						"ParameterAssignments": {
+							"batch_size_param": "1",
+							"process_count_param": "1"
+						}
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
