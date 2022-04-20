@@ -72,10 +72,6 @@
 			}
 		],
 		"parameters": {
-			"region": {
-				"type": "string",
-				"defaultValue": "eastus"
-			},
 			"DatastoreName": {
 				"type": "string",
 				"defaultValue": "workspaceblobstore"
