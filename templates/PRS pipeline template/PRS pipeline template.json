@@ -1,0 +1,124 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PRS pipeline template')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SaveDatasetFromDataStore",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "GetBearerToken",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://eastus.experiments.azureml.net/dataset/v1.0/subscriptions/dac17ad8-ce32-4c19-b7c7-10f616eb58af/resourceGroups/miguAMLTest/providers/Microsoft.MachineLearningServices/workspaces/miguTest/saveddatasets/from-data-path",
+							"method": "POST",
+							"headers": {
+								"Authorization": {
+									"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+									"type": "Expression"
+								}
+							},
+							"body": {
+								"DatastoreName": "mnist_datastore",
+								"RelativePath": "mnist/0.png"
+							}
+						}
+					},
+					{
+						"name": "TriggerAzureMLPipline",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "SaveDatasetFromDataStore",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/dac17ad8-ce32-4c19-b7c7-10f616eb58af/resourceGroups/miguAMLTest/providers/Microsoft.MachineLearningServices/workspaces/miguTest/PipelineRuns/PipelineSubmit/6d0165d4-5a7c-48f4-8823-a75e384c958c",
+							"method": "POST",
+							"headers": {
+								"Authorization": {
+									"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+									"type": "Expression"
+								}
+							},
+							"body": {
+								"ExperimentName": "digit_identification",
+								"RunSource": "SDK",
+								"dataSetDefinitionValueAssignments": {
+									"savedDataSetReference": {
+										"Id": "@activity('SaveDatasetFromDataStore').output.id"
+									}
+								},
+								"ParameterAssignments": {
+									"batch_size_param": "1",
+									"process_count_param": "1"
+								}
+							}
+						}
+					},
+					{
+						"name": "GetBearerToken",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://login.microsoftonline.com/415bf3ca-9434-4156-8b6c-80442d16bfbb/oauth2/token",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/x-www-form-urlencoded"
+							},
+							"body": "grant_type=client_credentials&client_id=<your-client-id>&resource=<your-resource-manager-endpoint-url>&client_secret=<your-client-secret>"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
