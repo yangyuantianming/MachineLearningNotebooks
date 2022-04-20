@@ -19,7 +19,7 @@
 					"method": "POST",
 					"body": {
 						"DatastoreName": "workspaceblobstore",
-						"RelativePath": "mnist_images/"
+						"RelativePath": "mnist_images/0.png"
 					},
 					"authentication": {
 						"type": "MSI",
