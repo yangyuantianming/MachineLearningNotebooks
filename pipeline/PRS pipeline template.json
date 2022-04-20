@@ -47,7 +47,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/b74d82ad-22bc-44ab-895c-5eef91a0e578",
+					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/fee2763f-a84f-46d7-9629-34b39cea6d39",
 					"method": "POST",
 					"body": {
 						"ExperimentName": "digit_identification",
