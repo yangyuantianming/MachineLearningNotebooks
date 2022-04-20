@@ -18,8 +18,8 @@
 					"url": "https://eastus.api.azureml.ms/dataset/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
 					"method": "POST",
 					"body": {
-						"DatastoreName": "workspaceblobstore",
-						"RelativePath": "mnist_images/0.png"
+						"DatastoreName": "@pipeline().parameters.DatastoreName",
+						"RelativePath": "@pipeline().parameters.RelativePath"
 					},
 					"authentication": {
 						"type": "MSI",
@@ -71,6 +71,20 @@
 				}
 			}
 		],
+		"parameters": {
+			"region": {
+				"type": "string",
+				"defaultValue": "eastus"
+			},
+			"DatastoreName": {
+				"type": "string",
+				"defaultValue": "workspaceblobstore"
+			},
+			"RelativePath": {
+				"type": "string",
+				"defaultValue": "mnist_images"
+			}
+		},
 		"annotations": []
 	}
 }
