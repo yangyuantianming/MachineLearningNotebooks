@@ -1,0 +1,76 @@
+{
+	"name": "PRS ADF",
+	"properties": {
+		"activities": [
+			{
+				"name": "RegisterDataset",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://eastus.api.azureml.ms/dataset/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
+					"method": "POST",
+					"body": {
+						"DatastoreName": "@pipeline().parameters.DatastoreName",
+						"RelativePath": "@pipeline().parameters.RelativePath"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			},
+			{
+				"name": "RunPipeline",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/2ba339fe-8324-4e64-b3ba-403aac8f326b",
+					"method": "POST",
+					"body": {
+						"RunSource": "SDK",
+						"dataSetDefinitionValueAssignments": {
+							"mnist_param": {
+								"savedDataSetReference": {
+									"Id": "@activity('RegisterDataset').output.id"
+								}
+							}
+						},
+						"ParameterAssignments": {
+							"batch_size_param": "1",
+							"process_count_param": "1"
+						}
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"DatastoreName": {
+				"type": "string"
+			},
+			"RelativePath": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
