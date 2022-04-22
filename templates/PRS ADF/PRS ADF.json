@@ -1,0 +1,103 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PRS ADF')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "RegisterDataset",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://eastus.api.azureml.ms/dataset/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/saveddatasets/from-data-path",
+							"method": "POST",
+							"body": {
+								"DatastoreName": "@pipeline().parameters.DatastoreName",
+								"RelativePath": "@pipeline().parameters.RelativePath"
+							},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://management.azure.com/"
+							}
+						}
+					},
+					{
+						"name": "RunPipeline",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "RegisterDataset",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/52994d8a-40bd-41d1-a76c-07628aed019d",
+							"method": "POST",
+							"body": {
+								"RunSource": "SDK",
+								"dataSetDefinitionValueAssignments": {
+									"input_param": {
+										"savedDataSetReference": {
+											"Id": "@activity('RegisterDataset').output.id"
+										}
+									}
+								},
+								"ParameterAssignments": {
+									"batch_size_param": "1",
+									"process_count_param": "1"
+								}
+							},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://management.azure.com/"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"DatastoreName": {
+						"type": "string",
+						"defaultValue": "workspaceblobstore"
+					},
+					"RelativePath": {
+						"type": "string",
+						"defaultValue": "mnist_images"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
