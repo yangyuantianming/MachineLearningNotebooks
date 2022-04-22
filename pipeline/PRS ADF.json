@@ -47,12 +47,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/2ba339fe-8324-4e64-b3ba-403aac8f326b",
+					"url": "https://eastus.api.azureml.ms/pipelines/v1.0/subscriptions/4aaa645c-5ae2-4ae9-a17a-84b9023bc56a/resourceGroups/yayuan/providers/Microsoft.MachineLearningServices/workspaces/ocp-ws/PipelineRuns/PipelineSubmit/52994d8a-40bd-41d1-a76c-07628aed019d",
 					"method": "POST",
 					"body": {
 						"RunSource": "SDK",
 						"dataSetDefinitionValueAssignments": {
-							"mnist_param": {
+							"input_param": {
 								"savedDataSetReference": {
 									"Id": "@activity('RegisterDataset').output.id"
 								}
