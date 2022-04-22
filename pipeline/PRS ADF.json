@@ -65,10 +65,12 @@
 		],
 		"parameters": {
 			"DatastoreName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "workspaceblobstore"
 			},
 			"RelativePath": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "mnist_images/4.png"
 			}
 		},
 		"annotations": []
